@@ -30,9 +30,11 @@ router.post("/", protect, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+
 module.exports = router;
-const Router = require("express").Router();
-const { deleteJob } = require("../controllers/jobController");
+
+const { deleteJob } = require("../controllers/jobcontroller");
 
 router.delete("/:id", deleteJob);
 
