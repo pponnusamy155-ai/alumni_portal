@@ -5,7 +5,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f6f9;
+  background: #f1e1eb;
 }
 
 /* ===========================
@@ -13,7 +13,7 @@ body {
 =========================== */
 
 .navbar {
-  background: #1e3a8a;
+  background: #2c0ed8;
   color: white;
   padding: 15px 20px;
   display: flex;
@@ -96,7 +96,7 @@ body {
 
 .form button {
   padding: 12px;
-  background: #2563eb;
+  background: #3207f3;
   color: white;
   border: none;
   border-radius: 8px;
