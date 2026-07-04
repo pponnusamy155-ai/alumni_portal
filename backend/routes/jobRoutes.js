@@ -32,8 +32,6 @@ router.post("/", protect, async (req, res) => {
 });
 
 
-module.exports = router;
-
 const { deleteJob } = require("../controllers/jobcontroller");
 
 router.delete("/:id", deleteJob);
