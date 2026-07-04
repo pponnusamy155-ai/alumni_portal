@@ -1,28 +1,44 @@
+/* ===========================
+   Global Styles
+=========================== */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f4f6f9;
 }
 
+/* ===========================
+   Navbar
+=========================== */
+
 .navbar {
   background: #1e3a8a;
   color: white;
-  padding: 15px 30px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
-  flex-wrap: nowrap;   /* Important */
-}
-.logo {
-  margin: 0;
-  font-size: 36px;
 }
 
-.navbar a,  
-.navbar button {
+.logo {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+/* Navigation Links */
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.nav-links a,
+.nav-links button {
   color: white;
-  margin-left: 15px;
   text-decoration: none;
   background: transparent;
   border: none;
@@ -30,9 +46,37 @@ body {
   font-size: 16px;
 }
 
+.nav-links button:hover,
+.nav-links a:hover {
+  opacity: 0.8;
+}
+
+/* Hamburger */
+
+.menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* ===========================
+   Main Container
+=========================== */
+
 .container {
   padding: 30px;
 }
+
+.container h1 {
+  margin-top: 0;
+}
+
+/* ===========================
+   Forms
+=========================== */
 
 .form {
   display: flex;
@@ -52,12 +96,20 @@ body {
 
 .form button {
   padding: 12px;
-  border: none;
   background: #2563eb;
   color: white;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
 }
+
+.form button:hover {
+  background: #1d4ed8;
+}
+
+/* ===========================
+   Cards
+=========================== */
 
 .grid {
   display: grid;
@@ -71,21 +123,43 @@ body {
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
-/* Mobile Responsive */
-@media screen and (max-width: 768px) {
+
+/* ===========================
+   Mobile Responsive
+=========================== */
+
+@media (max-width: 768px) {
 
   .navbar {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 15px;
+    flex-wrap: wrap;
   }
 
-  .navbar a,
-  .navbar button {
+  .logo {
+    font-size: 26px;
+  }
+
+  .menu-btn {
     display: block;
-    margin: 10px 0;
+    margin-left: auto;
+  }
+
+  .nav-links {
+    display: none;
     width: 100%;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a,
+  .nav-links button {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    margin: 0;
   }
 
   .container {
@@ -100,96 +174,14 @@ body {
   .form textarea,
   .form select {
     width: 100%;
-  }
-}
-.nav-links {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-@media (max-width: 768px) {
-
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-    gap: 10px;
-    margin-top: 15px;
+    box-sizing: border-box;
   }
 
-  .nav-links a,
-  .nav-links button {
-    width: 100%;
-    margin: 5px 0;
-  }
-}
-
-/* ===========================
-   Navigation
-=========================== */
-
-.navbar {
-  background: #1e3a8a;
-  color: white;
-  padding: 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
-.navbar h2 {
-  margin: 0;
-}
-
-.nav-links {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-.nav-links a,
-.nav-links button {
-  color: white;
-  text-decoration: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.menu-btn {
-  display: none;
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 32px;
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-}
-
-/* ===========================
-   Mobile
-=========================== */
-
-@media screen and (max-width: 768px) {
-
-  .menu-btn {
-    display: block;
+  .grid {
+    grid-template-columns: 1fr;
   }
 
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 60px;
-    text-align: center;
-  }
-
-  .nav-links.active {
-    display: flex;
+  .card {
+    padding: 18px;
   }
 }
