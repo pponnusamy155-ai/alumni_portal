@@ -15,7 +15,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <h2>Alumni Portal</h2>
+      <h2 className="logo">Alumni Portal</h2>
 
       <button
         className="menu-btn"
