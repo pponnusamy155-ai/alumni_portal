@@ -12,9 +12,11 @@ body {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  flex-wrap: nowrap;   /* Important */
 }
 .logo {
   margin: 0;
+  font-size: 36px;
 }
 
 .navbar a,  
@@ -108,11 +110,6 @@ body {
 }
 @media (max-width: 768px) {
 
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .nav-links {
     flex-direction: column;
     width: 100%;
@@ -169,40 +166,30 @@ body {
   color: white;
   font-size: 32px;
   cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 /* ===========================
    Mobile
 =========================== */
 
-@media (max-width:768px){
+@media screen and (max-width: 768px) {
 
   .menu-btn {
-  display: block;
-  position: absolute;
-  top: 18px;
-  right: 20px;
-}
-  .nav-links{
-    display:none;
-    flex-direction:column;
-    position:absolute;
-    top:65px;
-    left:0;
-    width:100%;
-    background:#1e3a8a;
-    padding:15px 0;
-    z-index:1000;
+    display: block;
   }
 
-  .nav-links.active{
-    display:flex;
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 60px;
+    text-align: center;
   }
 
-  .nav-links a,
-  .nav-links button{
-    width:100%;
-    padding:12px;
-    text-align:center;
+  .nav-links.active {
+    display: flex;
   }
 }
