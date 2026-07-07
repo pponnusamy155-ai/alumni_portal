@@ -4,6 +4,7 @@ const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
+// Get all jobs
 router.get("/", async (req, res) => {
   try {
     const jobs = await Job.find().populate("postedBy", "name email");
@@ -13,16 +14,32 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Create a new job
 router.post("/", protect, async (req, res) => {
   try {
-    const { title, company, location, description } = req.body;
-
-    const job = await Job.create({
+    const {
+      name,
+      email,
+      phone,
       title,
       company,
       location,
+      salary,
+      lastDate,
       description,
-      postedBy: req.user.id
+    } = req.body;
+
+    const job = await Job.create({
+      name,
+      email,
+      phone,
+      title,
+      company,
+      location,
+      salary,
+      lastDate,
+      description,
+      postedBy: req.user.id,
     });
 
     res.status(201).json(job);
@@ -30,10 +47,5 @@ router.post("/", protect, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-
-const { deleteJob } = require("../controllers/jobcontroller");
-
-router.delete("/:id", deleteJob);
 
 module.exports = router;
