@@ -1,21 +1,43 @@
 const express = require("express");
 const Job = require("../models/Job");
-const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Get all jobs
+// ===========================
+// GET ALL JOBS
+// ===========================
 router.get("/", async (req, res) => {
   try {
-    const jobs = await Job.find().populate("postedBy", "name email");
-    res.json(jobs);
+    const jobs = await Job.find().sort({ createdAt: -1 });
+    res.status(200).json(jobs);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 });
 
-// Create a new job
-router.post("/", protect, async (req, res) => {
+// ===========================
+// GET SINGLE JOB
+// ===========================
+router.get("/:id", async (req, res) => {
+  try {
+    const job = await Job.findById(req.params.id);
+
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    res.status(200).json(job);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// ===========================
+// CREATE JOB
+// ===========================
+router.post("/", async (req, res) => {
   try {
     const {
       name,
@@ -29,7 +51,7 @@ router.post("/", protect, async (req, res) => {
       description,
     } = req.body;
 
-    const job = await Job.create({
+    const job = new Job({
       name,
       email,
       phone,
@@ -39,12 +61,43 @@ router.post("/", protect, async (req, res) => {
       salary,
       lastDate,
       description,
-      postedBy: req.user.id,
     });
 
-    res.status(201).json(job);
+    await job.save();
+
+    res.status(201).json({
+      message: "Job posted successfully",
+      job,
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
+
+// ===========================
+// DELETE JOB
+// ===========================
+router.delete("/:id", async (req, res) => {
+  try {
+    const job = await Job.findByIdAndDelete(req.params.id);
+
+    if (!job) {
+      return res.status(404).json({
+        message: "Job not found",
+      });
+    }
+
+    res.status(200).json({
+      message: "Job deleted successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: error.message,
+    });
   }
 });
 
