@@ -6,18 +6,30 @@ function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await API.post("/auth/login", form);
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      alert("Login successful");
-      navigate("/");
-    } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await API.post("/auth/login", form);
+
+    console.log("Response:", res.data);
+
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+
+    alert("Login successful");
+
+    navigate("/");
+  } catch (error) {
+    console.log(error);
+
+    alert(
+      error.response?.data?.message ||
+      error.message ||
+      "Login failed"
+    );
+  }
+};
 
   return (
     <div className="container">
